@@ -1,0 +1,42 @@
+@startuml
+
+  class TextEditor {
+    - content: StringBuilder
+    - filename: String
+    + TextEditor()
+    + write(text: String): void
+    + clear(): void
+    + setFilename(filename: String): void
+    + getContent(): String
+    + getFilename(): String
+    + save(): EditorMemento
+    + restore(memento: EditorMemento): void
+    + toString(): String
+  }
+  
+  class EditorMemento {
+    - content: String
+    - filename: String
+    - timestamp: long
+    + EditorMemento(content: String, filename: String)
+    # getContent(): String
+    # getFilename(): String
+  }
+  
+  class CareTaker {
+    - mementos: List<EditorMemento>
+    - currentIndex: int
+    + CareTaker()
+    + addMemento(memento: EditorMemento): void
+    + undo(): EditorMemento
+    + redo(): EditorMemento
+
+  }
+  
+
+  
+  TextEditor ..> EditorMemento
+  CareTaker --> EditorMemento 
+  
+
+}
