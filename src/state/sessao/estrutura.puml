@@ -1,0 +1,79 @@
+@startuml
+class ContaUsuario {
+    -estado: EstadoConta
+    +setEstado(estado: EstadoConta)
+    +registrar(email: String, nome: String)
+    +verificarEmail()
+    +desativar()
+    +ativar()
+}
+
+interface EstadoConta {
+    +registrar(conta: ContaUsuario, email: String, nome: String)
+    +verificarEmail(conta: ContaUsuario)
+    +desativar(conta: ContaUsuario)
+    +ativar(conta: ContaUsuario)
+    +getNomeEstado(): String
+}
+
+class EstadoAnonimo {
+    +registrar(conta: ContaUsuario, email: String, nome: String)
+    +verificarEmail(conta: ContaUsuario)
+    +desativar(conta: ContaUsuario)
+    +ativar(conta: ContaUsuario)
+    +getNomeEstado(): String
+}
+
+class EstadoVerificandoEmail {
+    +registrar(conta: ContaUsuario, email: String, nome: String)
+    +verificarEmail(conta: ContaUsuario)
+    +desativar(conta: ContaUsuario)
+    +ativar(conta: ContaUsuario)
+    +getNomeEstado(): String
+}
+
+class EstadoAtiva {
+    +registrar(conta: ContaUsuario, email: String, nome: String)
+    +verificarEmail(conta: ContaUsuario)
+    +desativar(conta: ContaUsuario)
+    +ativar(conta: ContaUsuario)
+    +getNomeEstado(): String
+}
+
+class EstadoDesativada {
+    +registrar(conta: ContaUsuario, email: String, nome: String)
+    +verificarEmail(conta: ContaUsuario)
+    +desativar(conta: ContaUsuario)
+    +ativar(conta: ContaUsuario)
+    +getNomeEstado(): String
+}
+
+note "Context" as N1
+ContaUsuario .. N1
+
+note "State" as N2
+EstadoConta .. N2
+
+note "ConcreteStateA" as N3
+EstadoAnonimo .. N3
+
+note "ConcreteStateB" as N4
+EstadoVerificandoEmail .. N4
+
+note "ConcreteStateC" as N5
+EstadoAtiva .. N5
+
+note "ConcreteStateD" as N6
+EstadoDesativada .. N6
+
+ContaUsuario o-- EstadoConta : state >
+EstadoConta <|.. EstadoAnonimo
+EstadoConta <|.. EstadoVerificandoEmail
+EstadoConta <|.. EstadoAtiva
+EstadoConta <|.. EstadoDesativada
+
+note "state->Handle()" as N7
+ContaUsuario .. N7
+N7 .. EstadoConta
+
+@enduml
