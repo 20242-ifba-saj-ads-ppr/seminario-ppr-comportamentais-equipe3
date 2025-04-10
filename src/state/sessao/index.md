@@ -1,3 +1,8 @@
+---
+export_on_save:
+  html: true
+---
+
 # State
 
 Permite a um objeto alterar seu comportamento quando o seu estado interno muda. O
